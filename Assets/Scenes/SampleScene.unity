@@ -868,7 +868,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 65
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1129,7 +1129,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60.000004
+    FieldOfView: 65
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -6257,11 +6257,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotationSmoothTime: 0.1
-  jumpHeight: 2
+  jumpHeight: 1.5
   gravity: -9.81
   cam: {fileID: 1057337697}
   groundCheck: {fileID: 319424536}
-  groundDistance: 1
+  groundDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 256
