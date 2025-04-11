@@ -33,32 +33,24 @@ public class PlayerShooting : MonoBehaviour
     {
         ammo -= 1;
 
-        // Raycast from the center of the camera
+        // Raycast from camera to mouse position to find shoot direction
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-
         Vector3 targetPoint;
 
-        // Check if the ray hits something within the shoot range
         if (Physics.Raycast(ray, out hit, shootRange, groundLayer | targetLayer))
         {
-            Debug.Log("Hit " + hit.transform.name);
             targetPoint = hit.point;
-
-            if (hit.transform.CompareTag("Enemy"))
-            {
-                hit.transform.GetComponent<enemyHealth>().TakeDamage(10);
-            }
         }
         else
         {
-            // If no hit, set a point forward in the direction of the ray
             targetPoint = ray.origin + ray.direction * shootRange;
-            Debug.Log("No hit, using fallback point.");
         }
 
-        // Always rotate and shoot toward the determined targetPoint
+        // Rotate player toward the target point
         RotatePlayer(targetPoint);
+
+        // Launch projectile in that direction
         LaunchProjectile(targetPoint);
     }
 
