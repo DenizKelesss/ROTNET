@@ -5,11 +5,11 @@ public class PlayerShooting : MonoBehaviour
     public Camera playerCamera;  // Reference to the player's camera
     public GameObject projectilePrefab;  // Projectile prefab
     public Transform shootPoint;  // Point where the projectile spawns (e.g., in front of the player)
-    public float shootForce = 20f;  // Force applied to the projectile
-    public float shootRange = 100f;  // Max range of the shot
+    public float shootForce = 25f;  // Force applied to the projectile
+    public float shootRange = 20f;  // Max range of the shot
     public LayerMask targetLayer;  // Layer mask to specify what the ray can hit (e.g., enemies)
     public LayerMask groundLayer;
-    public float rotationSpeed = 1000f;  // Speed of player rotation towards the click
+    public float rotationSpeed = 400f;  // Speed of player rotation towards the click
     public int ammo = 150;
 
 
@@ -78,16 +78,13 @@ public class PlayerShooting : MonoBehaviour
     void LaunchProjectile(Vector3 targetPosition)
     {
         // Instantiate the projectile at the shoot point
-        GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
-
-        // Calculate the direction of the projectile (towards the target position)
-        Vector3 direction = (targetPosition - shootPoint.position).normalized;
-
-        // Rotate the projectile to face the direction it's moving
-        projectile.transform.rotation = Quaternion.LookRotation(direction);
+        GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
 
         // Get the Rigidbody component of the projectile
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
+
+        // Calculate the direction of the projectile (towards the target position)
+        Vector3 direction = (targetPosition - shootPoint.position).normalized;
 
         // Apply a force to the projectile to launch it
         rb.AddForce(direction * shootForce, ForceMode.VelocityChange);
